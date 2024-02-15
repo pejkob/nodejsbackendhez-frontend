@@ -21,8 +21,8 @@ function Navbar(props) {
         <li className="nav-item">
           <a className="nav-link" href="/get-all">Items</a>
         </li>
-        <li className='nav-item'>
-            <a className='nav-link' href='/Login'>Login</a>
+        <li className='nav-item'>{props.loggedIn?<a id='login' className='nav-link' href='/Login'>Admin</a>:<a id='login' className='nav-link' href='/Login'>Login</a>}
+            
         </li>
         {props.loggedIn?<li className='nav-item'><NavLink to={"/"} className='nav-link rounded bg-danger' onClick={()=>onLogOutClicked()}>Log out</NavLink></li>:<></>}
        

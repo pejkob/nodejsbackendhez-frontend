@@ -15,7 +15,7 @@ function GetItems(props) {
             }
         };
         fetchData();
-    }, []);
+    }, [items]);
 
     const Cardmap = items.map((data, index) => (
         <div key={index} className="card" style={{ float: "left", margin: '10px', width: '18rem' }}>
