@@ -7,6 +7,7 @@ import GetItemsById from './GetItemsById';
 import Login from './Login';
 import NewData from './NewData';
 import PutData from './PutData';
+import DeleteData from './DeleteData';
 import { useState } from 'react';
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
           <Route path='/get-all' element={<GetItems/>}/>
           <Route path='/get/:SzallasId' element={<GetItemsById/>}/>
           <Route path='/login' element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
-          <Route path='/new' element={<NewData/>}/>
+          <Route path='/post' element={<NewData/>}/>
+          <Route path='/delete/:SzallasId' element={<DeleteData/>}/>
           <Route path='/put/:SzallasId' element={<PutData/>}/>
         </Routes>
     </BrowserRouter>
