@@ -6,6 +6,7 @@ import Home from './Home';
 import GetItemsById from './GetItemsById';
 import Login from './Login';
 import NewData from './NewData';
+import PutData from './PutData';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/get/:SzallasId' element={<GetItemsById/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/new' element={<NewData/>}/>
+          <Route path='/put/:SzallasId' element={<PutData/>}/>
         </Routes>
     </BrowserRouter>
   );

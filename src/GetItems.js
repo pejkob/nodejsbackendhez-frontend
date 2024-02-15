@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import GetItemsById from './GetItemsById';
+import PutData from './PutData';
 
 function GetItems(props) {
     const [items, SetItems] = useState([]);
 
-    const onEditClick = (index) => {
-        <GetItemsById loggedIn={props.loggedIn} index={index}></GetItemsById>;
-    };
-
+  
     const onDeleteClick = (index) => {
         axios.delete("https://nodejs.sulla.hu/data/" + index)
             .then(response => {
@@ -28,7 +26,7 @@ function GetItems(props) {
 
     const Cardmap = items.map((data, index) => {
         return (
-            <div key={index} className="card mx-auto" style={{ display: 'flex', margin: '10px', width: '18rem' }}>
+            <div key={index} className="card" style={{ float:"left", margin: '10px', width: '18rem' }}>
                 <NavLink to={"/get/" + data.id}>
                     <div className="card-body">
                         <h5 className="card-title">{data.name}</h5>
@@ -38,8 +36,8 @@ function GetItems(props) {
                         <p className="card-text">{data.minimum_nights}</p>
                     </div>
                 </NavLink>
-                {props.loggedIn ? <button onClick={() => onEditClick(index)}>Módosítás</button> : <></>}
-                {props.loggedIn ? <button onClick={() => onDeleteClick(data.id)}>Törlés</button> : <></>}
+                {props.loggedIn ? <NavLink className={'btn btn-warning'} to={"/put/"+data.id}>Módosítás</NavLink> : <></>}
+                {props.loggedIn ? <button className='btn btn-danger' onClick={() => onDeleteClick(data.id)}>Törlés</button> : <></>}
             </div>
         );
     });
@@ -47,7 +45,10 @@ function GetItems(props) {
     return (
         <>
             {props.loggedIn ? <NavLink className={"btn btn-success"} to={"/new"}>Új</NavLink> : <></>}
+            <div className='col-md-11 mx-auto'>
+
             {Cardmap}
+            </div>
         </>
     );
 }

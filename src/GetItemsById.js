@@ -16,17 +16,7 @@ function GetItemsById(props) {
 
   return (
     <>
-      {props.loggedIn ? (
-        <div className="card" style={{ width: '18rem' }}>
-          <div className="card-body">
-            <input type="text" value={szallas.name} />
-            <input type="text" value={szallas.hostname} />
-            <input type="text" value={szallas.location} />
-            <input type="text" value={szallas.price} />
-            <input type="text" value={szallas.minimum_nights} />
-          </div>
-        </div>
-      ) : (
+     
         <div className="card" style={{ width: '18rem' }}>
           <div className="card-body">
             <h5 className="card-title">{szallas.name}</h5>
@@ -36,7 +26,7 @@ function GetItemsById(props) {
             <p className="card-text">{szallas.minimum_nights}</p>
           </div>
         </div>
-      )}
+      
     </>
   );
 }
