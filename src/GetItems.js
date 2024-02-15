@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import GetItemsById from './GetItemsById';
@@ -7,49 +7,56 @@ import NewData from './NewData';
 function GetItems(props) {
 
     console.log(props.loggedIn);
+    const [items, SetItems] = useState([])
 
-    const onEditClick=(index)=>{
+    const onEditClick = (index) => {
         <GetItemsById loggedIn={props.loggedIn} index={index}></GetItemsById>
     }
 
-    
-    const onDeleteClick=(index)=>{
-
+    const onDeleteClick = (index) => {
+        axios.delete("https://nodejs.sulla.hu/data/" + index)
+            .then(response => {
+                
+                const updatedItems = [...items];
+                updatedItems.splice(index, 1);
+                SetItems(updatedItems);
+            })
+            .catch(error => console.error('Error deleting item:', error));
     }
 
-    const [items,SetItems]=useState([])
+    
 
-      const url="http://nodejs.sulla.hu/data";
-      useEffect(() => {
+    const url = "http://nodejs.sulla.hu/data";
+    useEffect(() => {
         axios.get(url)
-          .then(response => SetItems(response.data))
-          .catch(error => console.error('Hiba a lekérdezés során:', error));
-      }, []);
+            .then(response => SetItems(response.data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
 
-      const Cardmap = items.map((data, index) => {
+    const Cardmap = items.map((data, index) => {
         return (
-            <NavLink key={index} to={"/get/"+data.id}>
-                <div  className="card mx-auto" style={{display:'flex', margin:'10px', width: '18rem' }}>
-                  <div className="card-body">
-                    <h5 className="card-title">{data.name}</h5>
-                    <h6 className="card-subtitle mb-2 text-body-secondary">{data.hostname}</h6>
-                    <p className="card-text">{data.location}</p>
-                    <p className="card-text">{data.price}</p>
-                    <p className="card-text">{data.minimum_nights}</p>
-                  </div>
-                  {props.loggedIn?<button onClick={()=>onEditClick(index)}>Módosítás</button>:<></>}
-                  {props.loggedIn?<button onClick={()=>onDeleteClick(index)}>Törlés</button>:<></>}
+            <div className="card mx-auto" style={{ display: 'flex', margin: '10px', width: '18rem' }}>
+                    <NavLink key={index} to={"/get/" + data.id}>
+                    <div className="card-body">
+                        <h5 className="card-title">{data.name}</h5>
+                        <h6 className="card-subtitle mb-2 text-body-secondary">{data.hostname}</h6>
+                        <p className="card-text">{data.location}</p>
+                        <p className="card-text">{data.price}</p>
+                        <p className="card-text">{data.minimum_nights}</p>
+                    </div>
+            </NavLink>
+                    {props.loggedIn ? <button onClick={() => onEditClick(index)}>Módosítás</button> : <></>}
+                    {props.loggedIn ? <button onClick={() => onDeleteClick(data.id)}>Törlés</button> : <></>}
                 </div>
-          </NavLink>
         );
-      });
-      
-  return (
-    <>
-    {props.loggedIn?<NavLink className={"btn btn-success"} to={"/new"}>Új</NavLink>:<></>}
-    {Cardmap}
-    </>
-  )
+    });
+
+    return (
+        <>
+            {props.loggedIn ? <NavLink className={"btn btn-success"} to={"/new"}>Új</NavLink> : <></>}
+            {Cardmap}
+        </>
+    )
 }
 
-export default GetItems
+export default GetItems;
