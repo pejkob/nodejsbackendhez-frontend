@@ -1,8 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 function GetItems() {
 
+  
     const [items,SetItems]=useState([])
 
       const url="http://nodejs.sulla.hu/data";
@@ -14,7 +16,10 @@ function GetItems() {
 
       const Cardmap = items.map((data, index) => {
         return (
-          <div key={index} className="card" style={{ width: '18rem' }}>
+            <NavLink key={index} to={"/get/:SzallasId"+data.id}>
+
+           
+          <div  className="card" style={{ width: '18rem' }}>
             <div className="card-body">
               <h5 className="card-title">{data.name}</h5>
               <h6 className="card-subtitle mb-2 text-body-secondary">{data.hostname}</h6>
@@ -23,6 +28,7 @@ function GetItems() {
               <p className="card-text">{data.minimum_nights}</p>
             </div>
           </div>
+          </NavLink>
         );
       });
       

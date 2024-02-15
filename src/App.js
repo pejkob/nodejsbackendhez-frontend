@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} exact />
           <Route path='/get-all' element={<GetItems/>}/>
-          <Route path='/get/:ItemId' element={<GetItemsById/>}/>
+          <Route path='/get/:SzallasId' element={<GetItemsById/>}/>
           <Route path='/login' element={<Login/>}/>
         </Routes>
     </BrowserRouter>
