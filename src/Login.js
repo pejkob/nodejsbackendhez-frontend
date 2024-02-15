@@ -6,18 +6,22 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('login');
+    if (loginStatus === 'true') {
+      setLoggedIn(true);
+    }
+  }, []);
+
   const onSubmitClick = (e) => {
     e.preventDefault();
     if (email === 'login' && password === 'jelszo') {
+      localStorage.setItem("login", true);
       setLoggedIn(true);
     } else {
       alert('Hibás jelszó vagy felhasználónév!');
     }
   };
-
-  useEffect(() => {
-
-  }, [loggedIn]);
 
   return (
     <>

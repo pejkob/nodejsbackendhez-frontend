@@ -3,18 +3,15 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 function GetItemsById(props) {
-
-  console.log(props.loggedIn);
   const param = useParams();
   const id = param.SzallasId;
-  console.log(id);
   const [szallas, setSzallas] = useState([]);
 
   const url = "http://nodejs.sulla.hu/data/" + id;
   useEffect(() => {
     axios.get(url)
       .then(response => setSzallas(response.data))
-      .catch(error => console.error('Hiba a lekérdezés során:', error));
+      .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   return (
