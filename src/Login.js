@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import GetItems from './GetItems';
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const loginStatus = localStorage.getItem('login');
     if (loginStatus === 'true') {
-      setLoggedIn(true);
+      props.setLoggedIn(true);
     }
   }, []);
 
@@ -17,7 +16,7 @@ function Login() {
     e.preventDefault();
     if (email === 'login' && password === 'jelszo') {
       localStorage.setItem("login", true);
-      setLoggedIn(true);
+      props.setLoggedIn(true);
     } else {
       alert('Hibás jelszó vagy felhasználónév!');
     }
@@ -25,8 +24,8 @@ function Login() {
 
   return (
     <>
-      {loggedIn ? (
-        <GetItems loggedIn={loggedIn} />
+      {props.loggedIn ? (
+        <GetItems loggedIn={props.loggedIn} />
       ) : (
         <form>
           <div className="form-group">

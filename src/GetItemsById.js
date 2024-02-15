@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function GetItemsById(props) {
+function GetItemsById() {
   const param = useParams();
   const id = param.SzallasId;
   const [szallas, setSzallas] = useState([]);

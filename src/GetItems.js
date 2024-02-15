@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import GetItemsById from './GetItemsById';
-import PutData from './PutData';
+
 
 function GetItems(props) {
     const [items, SetItems] = useState([]);
