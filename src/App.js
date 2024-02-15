@@ -5,6 +5,7 @@ import GetItems from './GetItems';
 import Home from './Home';
 import GetItemsById from './GetItemsById';
 import Login from './Login';
+import NewData from './NewData';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/get-all' element={<GetItems/>}/>
           <Route path='/get/:SzallasId' element={<GetItemsById/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/new' element={<NewData/>}/>
         </Routes>
     </BrowserRouter>
   );
